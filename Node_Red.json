@@ -1,0 +1,674 @@
+[
+    {
+        "id": "7571806f1fd63f55",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3ff640e159160da0",
+        "type": "mqtt in",
+        "z": "7571806f1fd63f55",
+        "name": "",
+        "topic": "Itics/ITSOEH/lumenia",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "broker_itsoeh",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 140,
+        "wires": [
+            [
+                "81783e3c216a9c3d"
+            ]
+        ]
+    },
+    {
+        "id": "7fbd848fd88f1def",
+        "type": "function",
+        "z": "7571806f1fd63f55",
+        "name": "luz",
+        "func": "msg.payload = Number(msg.payload.luz);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 80,
+        "wires": [
+            [
+                "d8794e622483fae5",
+                "69aa4d42b9c4938a"
+            ]
+        ]
+    },
+    {
+        "id": "35ed7db2a02baf89",
+        "type": "function",
+        "z": "7571806f1fd63f55",
+        "name": "pres",
+        "func": "msg.payload = msg.payload.pres;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 140,
+        "wires": [
+            [
+                "54c8bee1c9724d92",
+                "51d5e266756ad417"
+            ]
+        ]
+    },
+    {
+        "id": "8d6d23dcd8419d44",
+        "type": "function",
+        "z": "7571806f1fd63f55",
+        "name": "ppm",
+        "func": "msg.payload = msg.payload.ppm;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 200,
+        "wires": [
+            [
+                "27f39e736955f882",
+                "a7a2939b108bb608"
+            ]
+        ]
+    },
+    {
+        "id": "81783e3c216a9c3d",
+        "type": "json",
+        "z": "7571806f1fd63f55",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "8d6d23dcd8419d44",
+                "35ed7db2a02baf89",
+                "7fbd848fd88f1def",
+                "ed45c7e8ddc7bec6",
+                "9d064ce4bc19a424"
+            ]
+        ]
+    },
+    {
+        "id": "d8794e622483fae5",
+        "type": "ui-gauge",
+        "z": "7571806f1fd63f55",
+        "name": "Luz",
+        "group": "dea8180848c476e7",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "gauge_Luz",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "160",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "300",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "1000",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "54c8bee1c9724d92",
+        "type": "ui-gauge",
+        "z": "7571806f1fd63f55",
+        "name": "Presion",
+        "group": "dea8180848c476e7",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "gauge_Presion",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#00f900",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#00f900",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#00f900",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "300",
+        "max": "1100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 780,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "27f39e736955f882",
+        "type": "ui-gauge",
+        "z": "7571806f1fd63f55",
+        "name": "Gas",
+        "group": "dea8180848c476e7",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "gauge_Gas",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "500",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "800",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "1000",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 770,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "69aa4d42b9c4938a",
+        "type": "ui-chart",
+        "z": "7571806f1fd63f55",
+        "group": "dea8180848c476e7",
+        "name": "Luz",
+        "label": "chart_Luz",
+        "order": 4,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 930,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "51d5e266756ad417",
+        "type": "ui-chart",
+        "z": "7571806f1fd63f55",
+        "group": "dea8180848c476e7",
+        "name": "Presion",
+        "label": "chart_Presion",
+        "order": 5,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 920,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7a2939b108bb608",
+        "type": "ui-chart",
+        "z": "7571806f1fd63f55",
+        "group": "dea8180848c476e7",
+        "name": "Gas",
+        "label": "chart_Gas",
+        "order": 6,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 930,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0c0b7cde247d8b82",
+        "type": "influxdb out",
+        "z": "7571806f1fd63f55",
+        "influxdb": "3ae21f16b6a9a735",
+        "name": "Datos",
+        "measurement": "monitoreo_skyglow",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "ITSOEH",
+        "bucket": "Lumenia_Data",
+        "x": 650,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "ed45c7e8ddc7bec6",
+        "type": "debug",
+        "z": "7571806f1fd63f55",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "9d064ce4bc19a424",
+        "type": "function",
+        "z": "7571806f1fd63f55",
+        "name": "InfluxDB",
+        "func": "// Creamos el objeto con las 3 variables que quieres\nmsg.payload = {\n    luz: Number(msg.payload.luz),\n    presion: Number(msg.payload.pres),\n    gas: Number(msg.payload.ppm)\n};\n\n// Opcional: añadimos etiquetas (tags) para identificar el dispositivo\nmsg.tags = {\n    ubicacion: \"ITSOEH\",\n    dispositivo: \"LilyGO_Gateway\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 20,
+        "wires": [
+            [
+                "0c0b7cde247d8b82"
+            ]
+        ]
+    },
+    {
+        "id": "broker_itsoeh",
+        "type": "mqtt-broker",
+        "name": "HiveMQ_Cloud_ITSOEH",
+        "broker": "059c09d2b86243c888215960a8d9811b.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "tls_itsoeh",
+        "clientid": "NodeRED_Mac_ITSOEH",
+        "autoConnect": true,
+        "usetls": true,
+        "compatmode": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "dea8180848c476e7",
+        "type": "ui-group",
+        "name": "Variables Atmosféricas",
+        "page": "5ef15d1861cbfaf2",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "3ae21f16b6a9a735",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "Lumenia",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://127.0.0.1:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "tls_itsoeh",
+        "type": "tls-config",
+        "name": "TLS_ITSOEH",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "059c09d2b86243c888215960a8d9811b.s1.eu.hivemq.cloud",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "5ef15d1861cbfaf2",
+        "type": "ui-page",
+        "name": "Monitoreo Skyglow",
+        "ui": "54b55551c56ee716",
+        "path": "/page3",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "8920aac3324a3563",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "54b55551c56ee716",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "8920aac3324a3563",
+        "type": "ui-theme",
+        "name": "ui-base",
+        "colors": {
+            "surface": "#000000",
+            "primary": "#0042aa",
+            "bgPage": "#000000",
+            "groupBg": "#000000",
+            "groupOutline": "#7a7a7a"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "a9548026fa57437a",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.2",
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]
