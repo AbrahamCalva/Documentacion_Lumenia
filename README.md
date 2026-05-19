@@ -1,227 +1,204 @@
-```markdown
-# FLDSMDFR — Full Light Detection & Skyglow Monitoring: Dark-sky Field Research
-## Plataforma Integrada de Monitoreo Ambiental y Contaminación Lumínica "Lumenia"
 
-Este repositorio contiene la documentación de ingeniería, los códigos fuente completamente comentados, los esquemas de conexión eléctrica y los archivos de configuración de infraestructura necesarios para replicar de forma completa el prototipo **FLDSMDFR**. El sistema ha sido diseñado y desarrollado como el Proyecto Integrador del 6° Semestre de la carrera de Ingeniería en Tecnologías de la Información y Comunicaciones en el ITSOEH.
+# MANUAL DE USUARIO Y REFERENCIA TÉCNICA INTEGRAL
 
----
+## Plataforma Distribuida de Monitoreo Ambiental y Contaminación Lumínica "Lumenia"
 
-## 👥 Integrantes del Equipo
-* **Calva Abraham** (Matrícula: 230110637)
-* **Gonzaga López Luis Fernando** (Matrícula: 230110528)
-* **López Paz Gustavo** (Matrícula: 230110531)
-* **Martínez Hernández Brayan** (Matrícula: 230110578)
+### DATOS INSTITUCIONALES DEL PROYECTO
 
-* **Catedrático Institucional:** Mtro. Saúl Isaí Soto Ortiz  
-* **Periodo de Desarrollo:** Enero – Mayo 2026  
-* **Ubicación de Origen:** Mixquiahuala de Juárez, Hidalgo, México
+* **Prototipo Desarrollado:** FLDSMDFR (Full Light Detection & Skyglow Monitoring: Dark-sky Field Research)
+* **Autores e Integrantes del Equipo:**
+* Calva Abraham (Matrícula: 230110637)
+* Gonzaga López Luis Fernando (Matrícula: 230110528)
+* López Paz Gustavo (Matrícula: 230110531)
+* Martínez Hernández Brayan (Matrícula: 230110578)
 
----
 
-## 📌 Índice
-1. [Introducción y Justificación del Proyecto](#1-introducción-y-justificación-del-proyecto)
-2. [Objetivos del Sistema](#2-objetivos-del-sistema)
-3. [Requerimientos de Hardware y Software](#3-requerimientos-de-hardware-y-software)
-4. [Esquemas de Conexión Eléctrica (Pinouts)](#4-esquemas-de-conexión-eléctrica-pinouts)
-5. [Matrices de Direccionamiento y Parámetros de Red](#5-matrices-de-direccionamiento-y-parámetros-de-red)
-6. [Arquitectura del Sistema y Flujo de Datos](#6-arquitectura-del-sistema-y-flujo-de-datos)
-7. [Firmware Comentado del Proyecto](#7-firmware-comentado-del-proyecto)
-8. [Configuración del Backend e Infraestructura Docker](#8-configuración-del-backend-e-infraestructura-docker)
-9. [Gestión Energética y Autonomía de Campo](#9-gestión-energética-y-autonomía-de-campo)
-10. [Recomendaciones, Precauciones y Solución de Problemas](#10-recomendaciones-precauciones-y-solución-de-problemas)
-11. [Guía de Replicación Paso a Paso](#11-guía-de-replicación-paso-a-paso)
+* **Programa Académico:** Ingeniería en Tecnologías de la Información y Comunicaciones
+* **Asignatura y Nivel:** Proyecto Integrador – 6° Semestre, Grupo B
+* **Institución Educativa:** Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH)
+* **Catedrático Evaluador:** Mtro. Saúl Isaí Soto Ortiz
+* **Periodo de Desarrollo:** Enero – Mayo 2026
+* **Ubicación de Emisión:** Mixquiahuala de Juárez, Hidalgo, México
 
 ---
 
-## 1. Introducción y Justificación del Proyecto
+## 1. INTRODUCCIÓN Y JUSTIFICACIÓN DEL PROYECTO
 
-La transición acelerada hacia entornos urbanos hiper-iluminados ha transformado la noche de un fenómeno natural en un producto de la ingeniería civil. La iluminación artificial nocturna (ALAN), cuando es gestionada de manera deficiente, da origen a la contaminación lumínica. Este es un problema ambiental de escala global que la International Dark-Sky Association (IDA) define como el uso inapropiado o excesivo de luz artificial, acarreando consecuencias críticas para la biodiversidad, la investigación científica astronómica, la salud visual y la estabilidad del ciclo circadiano humano debido a la supresión en la producción de melatonina.
+La transición acelerada hacia entornos urbanos hiper-iluminados ha transformado la noche de un fenómeno natural en un producto de la ingeniería civil. Si bien la iluminación artificial nocturna (ALAN, por sus siglas en inglés) es un pilar fundamental para la seguridad pública y el desarrollo económico, su gestión deficiente y descontrolada ha dado origen a la contaminación lumínica. La International Dark-Sky Association (IDA) la define formalmente como el uso inapropiado, intrusivo o excesivo de luz artificial, cuyas consecuencias directas impactan críticamente en la biodiversidad, la investigación científica astronómica, la salud visual y la estabilidad de los ecosistemas nocturnos.
 
-Según los datos técnicos expuestos en el *"New World Atlas of Artificial Night Sky Brightness"*, más del 80% de la población mundial vive bajo cielos contaminados por luz, lo que impide de forma directa que un tercio de la humanidad pueda observar la Vía Láctea. 
+### El Fenómeno del Skyglow y la Pérdida del Patrimonio Astronómico
 
-En México, el crecimiento demográfico acelerado ha superado la capacidad de planeación urbana sostenible. El prototipo FLDSMDFR se alinea directamente con los Programas Nacionales Estratégicos (**PRONACES**) del CONAHCYT en los ejes prioritarios de Sustentabilidad Ambiental y Agentes Tóxicos y Procesos Contaminantes. Al proponer una infraestructura de monitoreo basada en el Internet de las Cosas (IoT) y la tecnología de radio de largo alcance LoRa, este proyecto busca cubrir la carencia actual de datos técnicos precisos y de bajo costo en los municipios e instituciones educativas, permitiendo evaluar el cumplimiento de normativas vigentes como la **NOM-013-ENER-2013** (Eficiencia energética para alumbrado en vialidades). El ecosistema convierte la percepción subjetiva de la sobreiluminación en datos cuantitativos y reproducibles.
+Uno de los efectos más visibles y alarmantes de la sobreiluminación es el skyglow o resplandor lumínico nocturno. Este fenómeno se manifiesta como un domo difuso de luz grisácea o amarillenta que cubre las ciudades. De acuerdo con los datos técnicos expuestos en el "New World Atlas of Artificial Night Sky Brightness", más del 80% de la población mundial vive bajo cielos contaminados por luz, lo que impide de forma directa que un tercio de la humanidad pueda observar la Vía Láctea desde sus lugares de origen. La Unión Astronómica Internacional (IAU) ha advertido que la dispersión de luz artificial en las partículas flotantes de la atmósfera erosiona un patrimonio cultural y natural fundamental para la ciencia. El proyecto FLDSMDFR aborda esta problemática de manera empírica, relacionando la iluminancia con la calidad del aire.
+
+### Impacto en la Salud Pública y la Alteración del Ciclo Circadiano
+
+La problemática de la contaminación lumínica trasciende la pérdida del cielo estrellado y se convierte en un tema crítico de salud pública. La Organización Mundial de la Salud (OMS) y diversas investigaciones en el área de la cronobiología señalan que la exposición a luz blanca e intensa durante las horas de la noche inhibe drásticamente la producción de melatonina en el cerebro, alterando el ciclo circadiano. Esta disrupción crónica se asocia con trastornos severos del sueño, fatiga e incremento de riesgos metabólicos. Asimismo, la Comisión Internacional de la Iluminación (CIE) destaca que el deslumbramiento y el exceso de contraste en vialidades públicas afectan negativamente el confort visual, incrementando la fatiga ocular y reduciendo la capacidad de reacción, lo que contradice el propósito original de seguridad de la iluminación pública.
+
+### Contexto Nacional y Marco Estratégico
+
+En México, el crecimiento demográfico acelerado y la expansión urbana mal planificada han superado la capacidad de aplicar políticas de iluminación sostenible. El prototipo FLDSMDFR se alinea directamente con los Programas Nacionales Estratégicos (PRONACES) del CONAHCYT, específicamente dentro de los ejes prioritarios de Sustentabilidad Ambiental y Agentes Tóxicos y Procesos Contaminantes. Al proponer una infraestructura de monitoreo basada en el Internet de las Cosas (IoT) y la tecnología inalámbrica de largo alcance LoRa, este proyecto busca cubrir la carencia actual de datos técnicos precisos y de bajo costo en los municipios del Valle del Mezquital, permitiendo evaluar el cumplimiento de normativas vigentes como la NOM-013-ENER-2013 (Eficiencia energética para alumbrado en vialidades). El ecosistema convierte la percepción subjetiva de la sobreiluminación en datos cuantitativos y reproducibles.
 
 ---
 
-## 2. Objetivos del Sistema
+## 2. OBJETIVOS DEL SISTEMA
 
 ### 2.1 Objetivo General
-Diseñar un sistema IoT para el monitoreo y análisis de la contaminación lumínica, mediante el uso de sensores de alta sensibilidad y tecnología de transmisión LoRa 915 MHz, con el fin de cuantificar el brillo del cielo nocturno (skyglow) y la eficiencia de la iluminación pública, generando datos en tiempo real visualizados en Grafana/Node-RED que fundamenten estrategias de sostenibilidad ambiental y preservación de la visibilidad astronómica en entornos urbanos e institucionales.
+
+Diseñar e implementar un sistema IoT distribuido para el monitoreo y análisis de la contaminación lumínica, mediante el uso de sensores de alta sensibilidad y tecnología de transmisión inalámbrica LoRa, con el fin de cuantificar el brillo del cielo nocturno (skyglow) y la eficiencia de la iluminación pública, generando datos en tiempo real visualizados en plataformas de gestión (Grafana/Node-RED) que fundamenten estrategias de sostenibilidad ambiental y preservación de la visibilidad astronómica en entornos urbanos e institucionales.
 
 ### 2.2 Objetivos Específicos
-* **Configurar e implementar** nodos sensores basados en microcontroladores de alta eficiencia, integrando el sensor de iluminancia de alto rango dinámico TSL2591, el sensor barométrico BMP280 para variables atmosféricas y el sensor electroquímico MQ-135 para la identificación de agentes contaminantes dispersores de luz.
-* **Implementar un protocolo de comunicación** inalámbrica robusto basado en tecnología LoRa que garantice la transmisión estable de datos en formato JSON desde los nodos periféricos hasta un Gateway centralizado.
-* **Orquestar un ecosistema de datos** mediante contenedores Docker que integre Node-RED para la gestión del flujo de información, InfluxDB como motor de persistencia de series temporales y Grafana para el diseño de tableros analíticos interactivos.
-* **Evaluar el desempeño operativo** del sistema FLDSMDFR en condiciones de campo reales, documentando el diseño en un repositorio público en GitHub para permitir su réplica absoluta por parte de terceros.
+
+* **Configurar y ensamblar** nodos sensores basados en microcontroladores de alta eficiencia, integrando el sensor TSL2591 para la captura de luminancia en rangos de baja intensidad, el BMP280 para el monitoreo de variables atmosféricas y el MQ-135 para identificar agentes contaminantes o nubosidad que actúan como elementos de dispersión de luz.
+* **Implementar un protocolo de comunicación inalámbrica** basado en tecnología LoRa que garantice la transmisión de datos en formato JSON desde los nodos periféricos hasta un Gateway central, asegurando la robustez y el alcance de la señal en entornos institucionales o urbanos.
+* **Orquestar un ecosistema de datos** mediante Docker que integre Node-RED para la gestión del flujo de información e InfluxDB como motor de persistencia para el almacenamiento de series temporales de todas las variables recolectadas.
+* **Diseñar tableros interactivos en Grafana** que permitan analizar en tiempo real la relación entre la calidad del aire y los niveles de sobreexposición lumínica, facilitando la interpretación técnica del fenómeno del skyglow bajo distintas condiciones atmosféricas.
+* **Evaluar el desempeño operativo** del sistema FLDSMDFR en campo para generar información cuantificable que permita sustentar estrategias de gestión lumínica y promover la preservación de la visibilidad astronómica y salud visual.
 
 ---
 
-## 3. Requerimientos de Hardware y Software
+## 3. DESCRIPCIÓN DETALLADA DE LA INSTRUMENTACIÓN (SENSORES)
 
-### 3.1 Lista de Componentes de Hardware (BOM)
-| Componente | Cantidad | Función Operativa | Notas Técnicas |
-| :--- | :---: | :--- | :--- |
-| **Heltec WiFi LoRa 32 V2** | 2 | Nodo emisor periférico y nodo receptor de radio. | System-on-Chip basado en ESP32 con chip de radio SX1276/78 integrado. |
-| **Lilygo TTGO-T SIM7080G-S3** | 1 | Pasarela / Gateway de comunicación celular. | Actúa como Bridge de red transformando paquetes LoRa a MQTT via GPRS. |
-| **Sensor TSL2591** | 1 | Módulo óptico de iluminancia de alta precisión. | Sucesor avanzado del GY-30/BH1750; posee sensibilidad extrema de hasta 188 microluxes. |
-| **Sensor BMP280** | 1 | Medidor de presión atmosférica y temperatura. | Interfaz nativa de bus de datos I2C con operación fija a 3.3V. |
-| **Sensor MQ-135** | 1 | Módulo de análisis de calidad del aire y gases. | Detecta PPM de CO2, amoníaco y benceno. Salida analógica integrada. |
-| **Placa Perforada PCB** | 2 | Soporte y soldadura permanente del circuito. | Reemplaza la protoboard de pruebas para eliminar falsos contactos. |
-| **Batería LiPo 3.7V** | 1–2 | Celda de alimentación móvil autónoma de campo. | Capacidad nominal recomendada entre 1000 y 3000 mAh con JST. |
-| **Carcasa de Protección** | 2 | Encapsulado hermético con ranuras de ventilación. | Diseñada a medida e impresa en 3D en materiales PLA o PETG. |
-| **Antena SMA de 915 MHz** | 2 | Antena acoplada para radiación RF en banda ISM. | Incluye antena celular LTE de banda ancha acoplada al Gateway Lilygo. |
+En esta etapa del proyecto, la instrumentación ha sido seleccionada meticulosamente para garantizar precisión en entornos de muy baja señal, permitiendo una caracterización multimodal del entorno nocturno.
 
-### 3.2 Herramientas de Software Requeridas
-* **Arduino IDE (Versión 2.x o superior):** Para el desarrollo, compilación y flasheo del firmware en las placas Heltec y Lilygo.
-* **Docker Desktop (Versión 4.x o superior):** Para la inicialización y despliegue del stack unificado de persistencia y visualización de datos.
-* **Node-RED (v3.x embebido en Docker):** Motor gráfico de orquestación encargado del consumo MQTT y conversión a base de datos.
-* **InfluxDB (v2.x embebido en Docker):** Motor de base de datos relacional de series temporales enfocado en telemetría continua.
-* **Grafana (v10.x embebido en Docker):** Entorno gráfico avanzado para el renderizado de instrumentos de aguja y gráficas de tendencias.
-* **HiveMQ Cloud Broker (Free Tier):** Servidor MQTT en la nube utilizado para el enrutamiento y desacoplamiento de tramas JSON.
+### Tabla 1: Justificación e Impacto de los Componentes
 
-### 3.3 Librerías del Ecosistema Arduino
-Es obligatorio instalar las siguientes extensiones mediante el Administrador de Librerías del IDE antes de compilar:
-* `Heltec ESP32 Dev-Boards` (Paquete de soporte de tarjetas oficiales vía URL de preferencias).
-* `Adafruit TSL2591 Library` (Controlador nativo del sensor de iluminancia HDR).
-* `Adafruit BMP280 Library` (Gestor de lecturas barométricas e I2C).
-* `ArduinoJson` por Benoit Blanchon (Serialización y estructuración de los objetos JSON).
-* `ESPAsyncWebServer` + `AsyncTCP` (Mapeo de las llamadas asíncronas HTTP del panel de red local).
+| Sensor / Componente | Variables Medidas | Justificación e Impacto Técnico en el Sistema |
+| --- | --- | --- |
+| **TSL2591 HDR**<br>(Evolución del GY-30) | Iluminancia en luxes (lx) e infrarrojo cercano. | Sensor óptico de rango dinámico extremo. A diferencia del BH1750 (GY-30) que cuenta con un límite inferior de 1 lux de resolución, el TSL2591 posee una sensibilidad de hasta 188 microluxes (µlux). Permite registrar las variaciones mínimas del cielo nocturno (skyglow) traduciendo percepciones subjetivas en métricas de alta precisión para el éxito del monitoreo. |
+| **BMP280** | Temperatura (°C) y Presión Atmosférica (hPa). | Aporta el contexto físico de la densidad y estabilidad de la atmósfera. Los frentes climáticos y cambios de presión modifican el índice de refracción, alterando directamente cómo se refracta y dispersa la luz artificial hacia el cenit. |
+| **MQ-135** | CO2, amoníaco, benceno, humo y gases. | Identifica la carga de agentes contaminantes en PPM. Esencial debido a que los aerosoles y partículas suspendidas actúan como elementos de dispersión bajo el efecto Mie, atrapando la luz ascendente y magnificando el "domo de luz" urbano. |
+
+### Módulos de Expansión Tecnológica Futura
+
+Bajo un enfoque de arquitectura modular y escalable, el sistema contempla la futura validación e integración de las siguientes variables:
+
+* **Sensor de Luz Ultravioleta (VEML6075):** Mide índices de luz UV-A y UV-B para validar la ausencia absoluta de radiación solar residual en las mediciones nocturnas, aportando un enfoque de salud dermatológica preventiva frente al estrés oxidativo urbano.
+* 
+**Sensor de Luz Espectral (AS7341 o TCS34725):** Diseñado para determinar la firma cromática (RGB y temperatura de color) de las luminarias públicas, diferenciando la iluminación cálida de la fría (luz azul), la cual tiene un mayor índice de dispersión Rayleigh/Mie e impacto directo en los ritmos circadianos .
+
+
+* 
+**Sensor de Nivel de Ruido (KY-037):** Encargado de capturar el nivel sonoro ambiental para evaluar el confort y bienestar nocturno urbano desde una perspectiva multidimensional .
+
+
 
 ---
 
-## 4. Esquemas de Conexión Eléctrica (Pinouts)
+## 4. ESQUEMAS DE CONEXIÓN ELÉCTRICA (PINOUTS)
 
-### 4.1 Conexión del Nodo Emisor (Heltec WiFi LoRa 32 V2)
-El bloque de adquisición comparte las líneas de hardware del bus de comunicación I2C de la placa Heltec, habilitando el pin de control `Vext` como interruptor lógico de paso de energía para mitigar el consumo eléctrico.
+El hardware pasó de una fase de pruebas en protoboard a una placa de prototipos perforada permanente con conexiones debidamente soldadas, eliminando falsos contactos durante el monitoreo continuo en campo.
 
-| Sensor / Dispositivo Periférico | Pin Físico del Sensor | Pin Asignado Heltec V2 | Descripción de la Señal |
-| :--- | :--- | :--- | :--- |
-| **TSL2591 (Luz HDR)** | VCC <br> GND <br> SDA <br> SCL | 3.3V (Línea `Vext`) <br> GND <br> GPIO 4 <br> GPIO 15 | Alimentación conmutada (GPIO 21 = LOW activa). <br> Tierra común de referencia eléctrica. <br> Línea de datos del bus I2C (Pull-up interno activo). <br> Línea de reloj del bus I2C (Pull-up interno activo).|
-| **BMP280 (Presión/Temp)** | VCC <br> GND <br> SDA <br> SCL | 3.3V (Línea `Vext`) <br> GND <br> GPIO 4 <br> GPIO 15 | Comparte la línea conmutada de energía del bus. <br> Referencia cero del circuito impreso. <br> Compartido en canal de datos I2C (Dirección 0x76). <br> Compartido en canal de sincronía de reloj. |
-| **MQ-135 (Calidad de Aire)**| VCC <br> GND <br> AOUT <br> DOUT | 5V (Línea de Bus USB) <br> GND <br> GPIO 36 <br> GPIO 37 | Requiere voltaje alto para la celda térmica interna. <br> Tierra común de referencia eléctrica. <br> Salida analógica acoplada a canal ADC1_CH0. <br> Salida digital de umbral por hardware (Opcional). |
+### Tabla 2: Conexiones del Nodo Emisor Periférico
 
-### 4.2 Conexión UART del Módulo Receptor Dual (Bridge Gateway)
-El nodo Heltec configurado como receptor se enlaza mediante comunicación directa por hardware serial hacia la tarjeta Lilygo celular para actuar como puente hacia la nube.
+Todos los sensores del nodo periférico interactúan mediante el bus físico I2C, compartiendo líneas y estabilizados por el pin controlado por software `Vext` .
 
-| Tarjeta Origen (Heltec LoRa RX) | Pin de Salida | Tarjeta Destino (Lilygo Gateway) | Pin de Entrada | Descripción de la Interfaz |
-| :--- | :--- | :--- | :--- | :--- |
-| **Heltec LoRa 32 V2** | GPIO 23 (TXD) | **Lilygo SIM7080G-S3** | Pin 08 (RXD) | Traspaso serie de la cadena parseada. |
-| **Heltec LoRa 32 V2** | GPIO 22 (RXD) | **Lilygo SIM7080G-S3** | Pin 03 (TXD) | Canal inverso de comandos serie. |
-| **Heltec LoRa 32 V2** | GND | **Lilygo SIM7080G-S3** | GND | Retorno y masa común obligatoria. |
+| Sensor / Periférico | Pin del Sensor | Pin Heltec LoRa 32 V2 | Descripción y Notas de Estabilidad |
+| --- | --- | --- | --- |
+| **TSL2591 / GY-30** | VCC  <br><br> GND <br><br> SDA<br><br>SCL | 3.3V(Línea Vext) <br><br> GND <br> <br>GPIO 4 <br><br>GPIO 15 | Alimentación conmutada (GPIO 21 = LOW activa energía).<br><br>Tierra común obligatoria de referencia.<br><br>Línea de datos I2C con Pull-up interno habilitado.<br><br>Línea de reloj I2C con Pull-up interno habilitado. |
+| **BMP280** | VCC<br><br>GND<br><br>SDA<br><br>SCL | 3.3V (Línea Vext)<br><br>GND<br><br>GPIO 4<br><br>GPIO 15 | Comparte la línea conmutada de energía de sensores.<br><br>Tierra común de la placa.<br><br>Comparte canal de datos I2C (Dirección lógica 0x76).<br><br>Comparte canal de reloj de bus I2C. |
+| **MQ-135** | VCC<br><br>GND<br><br>AOUT<br><br>DOUT | 5V (Línea USB)<br><br>GND<br><br>GPIO 36<br><br>GPIO 37 | Requiere voltaje estable de 5V para su celda de calentamiento térmica.<br><br>Tierra común de referencia.<br><br>Entrada analógica nativa de 12 bits (ADC1_CH0).<br><br>Salida digital de umbral por hardware (Opcional). |
 
----
+### Tabla 3: Conexiones en el Bloque de Recepción (Bridge Gateway)
 
-## 5. Matrices de Direccionamiento y Parámetros de Red
+La Heltec receptora se acopla directamente por hardware a la pasarela celular Lilygo a través de sus puertos UART seriales dedicados .
 
-### 5.1 Direcciones de Dispositivos en el Bus I2C
-* **Sensor de Iluminancia HDR TSL2591:** Dirección lógica `0x29` (Inalterable por hardware de fábrica).
-* **Sensor Barométrico BMP280:** Dirección lógica `0x76` (Configurable a `0x77` al puentear el pin SDO a nivel alto).
-* **Sensor GY-30 / BH1750 (Legacy):** Dirección lógica `0x23` (Modificable a `0x5C` mediante el pin ADDR).
-
-### 5.2 Parámetros del Perfil de Radiofrecuencia LoRa P2P
-* **Frecuencia Central de Operación:** 915 MHz (`915E6`), en cumplimiento estricto con la regulación de la banda ISM libre en México.
-* **Word de Sincronización (SyncWord):** `0x12` (Actúa como identificador de red privada lógica).
-* **Spreading Factor (Factor de Ensanchamiento):** SF7 por defecto (Garantiza velocidad y tasa de transferencia).
-* **Ancho de Banda de Canal:** 125 kHz de estándar para modulación Chirp Spread Spectrum.
-* **Potencia de Salida TX:** 14 dBm (Alineado con los límites máximos permitidos por el IFETEL).
-
-### 5.3 Parámetros de Endpoints e Infraestructura del Ecosistema
-* **MQTT Message Broker:** `HiveMQ Cloud` (Host del clúster remotos).
-* **Tópico de Red (Topic URI):** `Itics/ITSOEH/sensor`.
-* **Nivel de Confiabilidad MQTT:** `QoS 0` (Mecanismo fire-and-forget para flujo masivo regular).
-* **Node-RED Web Interface:** Puerto `1880` expuesto en localhost.
-* **InfluxDB Dashboard & API:** Puerto `8086` expuesto en localhost.
-* **Grafana Server UI:** Puerto `3000` expuesto en localhost.
+| Tarjeta Origen (Heltec RX) | Pin de Salida | Tarjeta Destino (Lilygo Gateway) | Pin de Entrada | Descripción de la Interfaz Serial |
+| --- | --- | --- | --- | --- |
+| **Heltec WiFi LoRa 32 V2** | GPIO 23 (TXD) | **Lilygo SIM7080G-S3** | Pin 08 (RXD) | Traspaso en ráfaga serie de la cadena CSV parseada. |
+| **Heltec WiFi LoRa 32 V2** | GPIO 22 (RXD) | **Lilygo SIM7080G-S3** | Pin 03 (TXD) | Canal inverso de control y comandos serie externos. |
+| **Heltec WiFi LoRa 32 V2** | GND | **Lilygo SIM7080G-S3** | GND común | Referencia de nivel cero común (Obligatoria). |
 
 ---
 
-## 6. Arquitectura del Sistema y Flujo de Datos
+## 5. MATRICES DE DIRECCIONAMIENTO Y PARÁMETROS DE RED
 
-El prototipo FLDSMDFR opera bajo una topología IoT estructurada en cuatro capas funcionales bien delimitadas:
+### Direccionamiento I2C e Interfaces de Entrada
 
-```text
-+-------------------------------------------------------------------------------+
-| 1. CAPA DE ADQUISICIÓN: Sensores Ambientales (TSL2591 + BMP280 + MQ-135)      |
-+-------------------------------------------------------------------------------+
-                                        │
-                                  (Bus I2C)
-                                        ▼
-+-------------------------------------------------------------------------------+
-| 2. CAPA DE TRANSMISIÓN LOCAL: Heltec TX (Conversión y Modulación RF 915 MHz)  |
-+-------------------------------------------------------------------------------+
-                                        │
-                         (Radio Enlace LoRa P2P - SyncWord 0x12)
-                                        ▼
-+-------------------------------------------------------------------------------+
-| 3. CAPA RECEPTORA/PUENTE: Heltec RX + Lilygo IoT Gateway (Estructuración JSON)|
-+-------------------------------------------------------------------------------+
-                                        │
-                         (Publicación Celular MQTT GPRS)
-                                        ▼
-+-------------------------------------------------------------------------------+
-| 4. CAPA DE ORQUESTACIÓN Y PROCESAMIENTO: Docker Container Stack               |
-|    - Broker HiveMQ Cloud (Enrutador de Mensajes)                             |
-|    - Node-RED (Filtro e inyección de flujos de datos)                        |
-|    - InfluxDB 2.x (Persistencia en Series Temporales en bucket 'Lumenia')     |
-+-------------------------------------------------------------------------------+
-                                        │
-                                (Consultas Flux)
-                                        ▼
-+-------------------------------------------------------------------------------+
-| 5. CAPA DE VISUALIZACIÓN FINAL: Grafana Real-Time Dashboards & Históricos     |
-+-------------------------------------------------------------------------------+
+* **Módulo Óptico TSL2591:** Dirección lógica fija `0x29` de fábrica.
+* **Módulo Barométrico BMP280:** Dirección lógica `0x76` por defecto (configurable a `0x77` al puentear el pin SDO).
+* **Módulo Óptico GY-30 (Legacy):** Dirección lógica `0x23` (pin ADDR a nivel bajo).
+* **Módulo de Gas MQ-135:** Interfaz analógica conectada al GPIO 36 mapeado en el ADC1 interno.
 
-```
+### Perfil de Configuración de Radiofrecuencia (LoRa P2P)
 
-### Formato de Interoperabilidad del Payload JSON
-
-Una vez que el Bridge emite el mensaje a la nube, la información viaja estandarizada en la capa de aplicación con el siguiente esquema de llaves fijas:
-
-```json
-{
-  "luz": 500.0,
-  "temp": 25.0,
-  "pres": 810.0,
-  "volt": 4.2,
-  "ppm": 400
-}
-
-```
+| Parámetro de Radio | Valor Asignado | Justificación Operativa / Regulatoria |
+| --- | --- | --- |
+| **Frecuencia Central** | 915 MHz (`915E6`) | Esquina operativa de la banda ISM libre autorizada en México por el IFT. |
+| **SyncWord (Palabra Sinc)** | `0x12` | Filtro lógico por software para evitar interferencias de redes ajenas. |
+| **Spreading Factor (SF)** | 7 | Configuración óptima balanceada entre velocidad de ráfaga y alcance. |
+| **Ancho de Banda (BW)** | 125 kHz | Ancho de canal estándar internacional para modulación Chirp Spread Spectrum. |
+| **Intervalo de Envío** | 2000 ms (2s) | Tiempo suficiente para registrar cambios ambientales sin saturar el espectro. |
 
 ---
 
-## 7. Firmware Comentado del Proyecto
+## 6. ARQUITECTURA DEL SISTEMA Y PROTOCOLOS DE COMUNICACIÓN
 
-### 7.1 Nodo Emisor Periférico (`Codigo_Emisor.ino`)
+El prototipo FLDSMDFR implementa una pila de protocolos multi-capa orientada a garantizar resiliencia en entornos institucionales y urbanos:
 
-Este sketch corre de forma dedicada en la tarjeta Heltec física acoplada a la instrumentación de campo.
+1. 
+**Protocolo I2C (Inter-Integrated Circuit):** Utilizado para la comunicación síncrona entre el microcontrolador ESP32 y los sensores periféricos mediante las líneas de datos (SDA) y reloj (SCL) compartidas, optimizando el uso de pines lógicos .
+
+
+2. **Protocolo SPI (Serial Peripheral Interface):** Canal síncrono de alta velocidad utilizado internamente para la transferencia de datos entre el núcleo del ESP32 y el transceptor de radio LoRa integrado (chip SX1276/78).
+3. 
+**Protocolo LoRa (Capa Física LPWAN):** Modulación por espectro ensanchado (Chirp Spread Spectrum) encargada del envío inalámbrico de tramas de telemetría a largas distancias con consumo de energía optimizado .
+
+
+4. 
+**Formato JSON (Capa de Aplicación):** Estructura estándar de organización de datos basada en pares clave-valor que unifica las variables de telemetría antes de su inyección a la nube .
+
+
+
+### Implementación de una Red Alámbrica de Emergencia
+
+Complementando la infraestructura de largo alcance, el prototipo integra un principio de **tolerancia a fallos** mediante una red de respaldo confinada por medio físico. Basada en los estándares de **Ethernet IEEE 802.3**, establece conectividad redundante directa y dedicada entre nodos utilizando un switch de Capa 2. Ante una eventual degradación del medio guiado por inducción, saturación del espectro radioeléctrico o falla en las antenas, el sistema realiza una transición inmediata hacia la infraestructura cableada, manteniendo la persistencia de las sesiones y servicios sin requerir reconfiguraciones lógicas en el endpoint.
+
+---
+
+## 7. GESTIÓN DE FLUJO DE DATOS EN TIEMPO REAL E INTEROPERABILIDAD
+
+### Centralización y Desacoplamiento de Datos
+
+Debido a que los nodos sensores operan de forma distribuida en un estado inalámbrico, la utilización de un broker MQTT permite centralizar la información evitando la necesidad de conocer direcciones IP o estados internos de los receptores. Esto dota al sistema de flexibilidad absoluta para añadir múltiples tableros visuales o bases de datos sin reprogramar los dispositivos físicos de campo.
+
+### Organización Mediante "Topics" y Jerarquías
+
+La información se organiza de forma escalable a través de jerarquías estructuradas que demuestran segmentación por tipo de de institución y tipo de dato (ej. `Itics/ITSOEH/sensor`). Esto facilita el crecimiento de la red de monitoreo urbano y permite que las herramientas de gestión filtren la información sin provocar colisiones de datos en el backend.
+
+### Calidad de Servicio (QoS) y Control de Fallos
+
+El broker distribuye los payloads bajo políticas adaptables de Calidad de Servicio:
+
+* **QoS 0 (Fire-and-forget):** Utilizado para las variables de telemetría regular y flujos de datos continuos, donde la pérdida ocasional de una trama no altera las tendencias estadísticas del análisis a largo plazo.
+* **QoS 1 o QoS 2:** Reservado para eventos críticos o alarmas del sistema, tales como picos drásticos de gases contaminantes o caídas del voltaje de operación por debajo de los umbrales nominales, garantizando la entrega del mensaje frente a intermitencias de la red celular.
+
+---
+
+## 8. FIRMWARE COMENTADO DEL PROYECTO
+
+### 8.1 Sketch del Módulo de Adquisición (Codigo_Emisor.ino)
 
 ```cpp
-// =======================================================================
-// FLDSMDFR — Nodo Emisor Periférico (Heltec WiFi LoRa 32 V2)
-// Proyecto Integrador de Ingeniería en TIC - ITSOEH
-// =======================================================================
+#include "heltec.h"
+#include <Wire.h>
+#include <BH1750.h>
+#include <Adafruit_BMP280.h>
 
-#include "heltec.h"          // Controlador unificado Heltec (LoRa, OLED)
-#include <Wire.h>             // Protocolo de bus de datos síncrono I2C
-#include <BH1750.h>           // Librería para el bloque de iluminancia legacy
-#include <Adafruit_BMP280.h>  // Librería para telemetría del sensor barométrico
+#define BAND     915E6
+#define SDA_PIN  4
+#define SCL_PIN  15
 
-#define BAND     915E6        // Frecuencia asignada por regulación en México (915 MHz)
-#define SDA_PIN  4            // Pin de hardware asignado a la línea SDA I2C en Heltec V2
-#define SCL_PIN  15           // Pin de hardware asignado a la línea SCL I2C en Heltec V2
-
-BH1750 lightMeter;            // Inicialización de la clase para el sensor óptico
-Adafruit_BMP280 bmp;          // Inicialización de la clase para el sensor barométrico
+BH1750 lightMeter;
+Adafruit_BMP280 bmp;
 
 void setup() {
   // Inicialización de periféricos integrados de la tarjeta
   Heltec.begin(true, true, true, true, BAND);
 
-  // Activación del Pin de paso energético Vext (Nivel lógico LOW satura el transistor)
+  // Activación del Pin de paso energético Vext
   pinMode(Vext, OUTPUT);
   digitalWrite(Vext, LOW);
-  delay(100);                 // Pausa de estabilización eléctrica de las celdas de entrada
+  delay(100);
 
   // Apertura del canal de datos I2C en los pines mapeados
   Wire.begin(SDA_PIN, SCL_PIN);
@@ -245,11 +222,11 @@ void setup() {
 
 void loop() {
   // Captura de las lecturas físicas analógico-digitales de sensores
-  float luz  = lightMeter.readLightLevel(); // Captura nativa en luxes
-  float temp = bmp.readTemperature();       // Captura nativa en grados Celsius
-  float pres = bmp.readPressure() / 100.0F; // Conversión matemática de Pascales a hPa
+  float luz  = lightMeter.readLightLevel();
+  float temp = bmp.readTemperature();
+  float pres = bmp.readPressure() / 100.0F;
 
-  // Construcción de la cadena compacta CSV delimitada por comas para optimizar RF
+  // Construcción de la cadena compacta CSV para optimizar RF
   String paquete = String(luz, 4) + "," + String(temp, 2) + "," + String(pres, 2);
 
   // Despliegue ráfaga de transmisión inalámbrica LoRa
@@ -266,37 +243,27 @@ void loop() {
   Heltec.display->drawString(0, 45, "Pres: " + String(pres, 2) + " hPa");
   Heltec.display->display();
 
-  delay(2000); // Intervalo de ciclo operativo de refresco (2 segundos)
+  delay(2000); // Intervalo de ciclo operativo
 }
 
 ```
 
-### 7.2 Nodo Receptor Local e Interfaz de Red Gateway (`Codigo_Receptor.ino`)
-
-Sketch dedicado para la decodificación de tramas RF y aprovisionamiento del servidor web asíncrono asilado en la red LAN local.
+### 8.2 Sketch del Nodo Receptor Local (Codigo_Receptor.ino)
 
 ```cpp
-// =======================================================================
-// FLDSMDFR — Nodo Receptor e Interfaz de Servidor Web Local
-// Proyecto Integrador de Ingeniería en TIC - ITSOEH
-// =======================================================================
-
 #include "heltec.h"
 #include <WiFi.h>
-#include <ESPAsyncWebServer.h>  // Librería para llamadas HTTP asíncronas no-bloqueantes
+#include <ESPAsyncWebServer.h>
 
 #define BAND 915E6
 
-// Configuración de credenciales de acceso a la infraestructura Wi-Fi local
 const char* ssid     = "TU_SSID_RED";       
 const char* password = "TU_PASSWORD_RED";   
 
-// Registro de almacenamiento global para refresco dinámico de datos
 String gLuz = "0", gTemp = "0", gPres = "0";
 
-AsyncWebServer server(80); // Apertura de servicio en el puerto web estándar HTTP 80
+AsyncWebServer server(80);
 
-// Plantilla de renderizado de la interfaz HTML embebida en memoria flash PROGMEM
 const char index_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE html><html>
 <head>
@@ -311,10 +278,9 @@ const char index_html[] PROGMEM = R"rawliteral(
 <body>
   <h2>Monitor Local del Servidor FLDSMDFR</h2>
   <div class="card"><div>Iluminancia (lx)</div><div class="value" id="luz">--</div></div>
-  <div class="card"><div>Temperatura (°C)</div><div class="value" id="temp">--</div></div>
-  <div class="card"><div>Presión (hPa)</div><div class="value" id="pres">--</div></div>
+  <div class="card"><div>Temperatura (&deg;C)</div><div class="value" id="temp">--</div></div>
+  <div class="card"><div>Presi&oacute;n (hPa)</div><div class="value" id="pres">--</div></div>
   <script>
-    // Rutina cíclica de consumo asíncrono mediante fetch API local sin recargar web
     setInterval(() => {
       fetch('/data').then(r => r.json()).then(d => {
         document.getElementById('luz').innerText  = d.luz;
@@ -328,9 +294,8 @@ const char index_html[] PROGMEM = R"rawliteral(
 
 void setup() {
   Heltec.begin(true, true, true, true, BAND);
-  LoRa.setSyncWord(0x12); // Acoplamiento estricto con el perfil de modulación emisor
+  LoRa.setSyncWord(0x12);
 
-  // Conexión lógica a la red inalámbrica local
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) { 
     delay(500); 
@@ -338,22 +303,19 @@ void setup() {
   }
   Serial.println("\nServidor listo. IP Asignada: " + WiFi.localIP().toString());
 
-  // Definición de las rutas lógicas del Servidor Web
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send_P(200, "text/html", index_html);
   });
   
   server.on("/data", HTTP_GET, [](AsyncWebServerRequest *request) {
-    // Encapsulado de las variables de cadena globales en un objeto JSON estandarizado
     String json = "{\"luz\":"  + String(gLuz.toFloat(), 2) +
                   ",\"temp\":" + String(gTemp.toFloat(), 2) +
                   ",\"pres\":" + String(gPres.toFloat(), 2) + "}";
     request->send(200, "application/json", json);
   });
   
-  server.begin(); // Apertura del daemon del socket web
+  server.begin();
 
-  // Despliegue permanente de la IP de consulta en la pantalla local OLED
   Heltec.display->clear();
   Heltec.display->drawString(0, 0, "IP Servidor Web:");
   Heltec.display->drawString(0, 15, WiFi.localIP().toString());
@@ -361,7 +323,6 @@ void setup() {
 }
 
 void loop() {
-  // Sondeo cíclico de presencia de paquetes en el buffer del transceptor LoRa
   int packetSize = LoRa.parsePacket();
   if (packetSize) {
     String datos = "";
@@ -370,7 +331,6 @@ void loop() {
     }
     Serial.println("Trama Recibida: " + datos);
 
-    // Algoritmo de desestructuración y parsing del string CSV por comas
     int coma1 = datos.indexOf(',');
     int coma2 = datos.indexOf(',', coma1 + 1);
     if (coma1 != -1 && coma2 != -1) {
@@ -380,7 +340,6 @@ void loop() {
       gLuz.trim(); gTemp.trim(); gPres.trim();
     }
 
-    // Actualización de pantalla de depuración in-situ
     Heltec.display->clear();
     Heltec.display->drawString(0, 0,  "RX STATUS: OK");
     Heltec.display->drawString(0, 15, "Luz: " + gLuz + " lx");
@@ -393,14 +352,14 @@ void loop() {
 
 ---
 
-## 8. Configuración del Backend e Infraestructura Docker
+## 9. CONFIGURACIÓN DEL BACKEND E INFRAESTRUCTURA DOCKER
 
-El backend completo de la aplicación se despliega mediante microservicios orquestados en Docker Compose desde la carpeta `/docker` del proyecto.
+El backend analítico completo de la aplicación se despliega mediante microservicios orquestados y aislados en Docker Desktop utilizando la siguiente estructuración de contenedores en el archivo `docker-compose.yml` :
 
 ```yaml
 version: '3.8'
 services:
-  # Node-RED: Motor de parsing, lógica de flujo y conexión MQTT de entrada
+  # Node-RED: Orquestación del flujo de datos, consumo MQTT y ruteo a base de datos
   nodered:
     image: nodered/node-red:latest
     ports:
@@ -409,7 +368,7 @@ services:
       - nodered_data:/data
     restart: unless-stopped
 
-  # InfluxDB: Base de datos relacional orientada a series temporales continuas
+  # InfluxDB: Base de datos distribuida optimizada para telemetría de series temporales
   influxdb:
     image: influxdb:2.7
     ports:
@@ -424,7 +383,7 @@ services:
       - influxdb_data:/var/lib/influxdb2
     restart: unless-stopped
 
-  # Grafana: Servidor de despliegue de paneles e instrumentación interactiva
+  # Grafana: Servidor web de renderizado analítico para tableros interactivos
   grafana:
     image: grafana/grafana:latest
     ports:
@@ -442,40 +401,47 @@ volumes:
 
 ---
 
-## 9. Gestión Energética y Autonomía de Campo
+## 10. GESTIÓN ENERGÉTICA, VALIDACIÓN DE RESULTADOS Y CONCLUSIONES
 
-El dispositivo periférico móvil ha sido optimizado estructuralmente para operación en campo mediante celdas independientes. El microcontrolador Heltec posee un circuito integrado de carga acoplado a un conector JST-PH 2.0 nativo para celdas de polímero de litio (LiPo) de 3.7V.
+### Proyección de Autonomía de Baterías LiPo
 
-* **Consumo de Corriente Promedio Activo:** ~180 mA (Durante ciclos ráfaga de sensado y disparo de RF LoRa).
-* **Consumo de Corriente en Modo Suspensión:** ~50 µA (Activado mediante el controlador nativo de bajo consumo `esp_deep_sleep_start()`).
+El nodo periférico incorpora soporte para celdas LiPo de 3.7V acopladas por interfaz JST. Bajo ráfagas de transmisión activa de radiofrecuencia el consumo se sitúa en 180 mA. Al implementar ciclos de bajo consumo mediante suspensión profunda (`esp_deep_sleep_start()`) durante el 95% del ciclo operativo, la autonomía estimada es la siguiente :
 
-### Tabla de Autonomía de Baterías Estimada en Despliegue
+* **Batería de 1000 mAh:** ~5.5 horas de forma activa continua / **~4.5 días** en campo.
+* **Batería de 2000 mAh:** ~11.0 horas de forma activa continua / **~9.0 días** en campo.
+* **Batería de 3000 mAh:** ~16.5 horas de forma activa continua / **~13.5 días** en campo.
 
-La proyección considera un ciclo de trabajo estándar con estados del 5% en ráfaga activa y 95% en suspensión profunda.
+### Validación Funcional y Resultados de Campo
 
-| Capacidad de la Celda LiPo | Horas en Operación Activa Continua | Duración Real Estimada con Ciclos Deep Sleep |
-| --- | --- | --- |
-| **1000 mAh** | ~5.5 horas | **~4.5 días** de autonomía. |
-| **2000 mAh** | ~11.0 horas | **~9.0 días** de autonomía. |
-| **3000 mAh** | ~16.5 horas | **~13.5 días** de autonomía. |
+Durante la fase de experimentación del prototipo, se realizaron múltiples ciclos de lectura y validación incremental:
 
----
+* **Módulo de Adquisición:** En condiciones de iluminación interior controlada, el sensor óptico registró valores estables entre 35 y 120 lux, mientras que en exposición directa superó los 300 lux, demostrando sensibilidad adecuada para el estudio de sobreexposición. El BMP280 arrojó lecturas consistentes dentro de un rango de tolerancia de ±1 °C respecto a estaciones meteorológicas de referencia local.
+* 
+**Módulo de Transmisión LoRa:** El envío de datos en la banda de 915 MHz fue totalmente exitoso bajo el perfil Sync Word 0x12, confirmando recepción íntegra de tramas CSV cada 2 segundos sin pérdidas de paquetes registradas en el entorno local .
 
-## 10. Recomendaciones, Precauciones y Solución de Problemas
 
-### ⚠️ Precauciones Eléctricas y de Seguridad
+* **Módulo Analítico JSON y Dashboards:** El gateway segmentó las variables de forma correcta mediante delimitadores lógicos y construyó los objetos JSON analizados por Node-RED e InfluxDB con consultas Flux ejecutadas con una latencia mínima de 0.01 segundos.
 
-* **Límite de Tensión del ADC:** Los canales de lectura analógica (GPIO 36) del ESP32 toleran estrictamente un rango de **0 a 3.3V**. Conectar salidas directas de celdas de 5V sin un puente de resistencias divisor de tensión provocará la destrucción permanente del silicio interno de la tarjeta Heltec.
-* **Aislamiento Térmico Óptico:** El sensor de gas MQ-135 disipa calor de forma pasiva debido a su filamento calefactor de óxido interno. Mantenga una separación física de al menos 5 centímetros con el sensor óptico TSL2591 para mitigar variaciones y errores de deriva en las mediciones de luz cenital.
-* **Validación de Polaridad de Celdas:** El estándar de cables rojo/negro de los conectores JST comerciales suele estar invertido en algunos distribuidores. Valide siempre el pinout de la batería LiPo con un multímetro antes de conectarlo a la placa para evitar daños térmicos destructivos inmediatos.
+### Conclusiones Individuales del Equipo
 
-### 🛠️ Matriz de Solución de Fallas Comunes (Troubleshooting)
+* **Calva Abraham:** El desarrollo del prototipo permitió integrar de manera funcional los módulos de adquisición, transmisión y visualización de datos ambientales nocturnos, validando la viabilidad técnica del sistema propuesto. La correcta lectura de los sensores junto con la transmisión estable mediante LoRa y la visualización web vía WiFi, demuestra que la arquitectura IoT implementada es coherente y escalable. Los resultados estadísticos obtenidos respaldan la estabilidad de las mediciones y evidencian la utilidad del sistema para analizar niveles de iluminación en distintos escenarios, constituyendo una base sólida para futuras ampliaciones y estudios más profundos sobre contaminación lumínica .
 
-| Problema Encontrado | Causa Raíz Más Probable | Acción Correctiva de Solución |
-| --- | --- | --- |
-| Error serial `Sensor de luz no detectado`. | La línea conmutada de potencia `Vext` de los pines compartidos del bus I2C está desactivada. | Confirmar la llamada explícita `digitalWrite(Vext, LOW)` en el método inicial de configuración. |
-| El emisor transmite pero el nodo receptor no intercepta tramas. | Desajuste en el parámetro de sincronización de la palabra clave de modulación RF LoRa. | Verificar la concordancia exacta de la instrucción `LoRa.setSyncWord(0x12)` en ambos sketches. |
-| Node-RED no recibe datos procedentes de la nube. | Discrepancia ortográfica en las cadenas de jerarquía de los tópicos del nodo MQTT input. | Sustituir el string del topic de forma temporal por el comodín wildcard `#` (`Itics/#`) para depurar la ruta exacta. |
-| Los instrumentos analíticos de Grafana muestran `No Data`. | Inconsistencia de mapeo de las variables lógicas en las consultas estructuradas en lenguaje Flux. | Comprobar que los buckets apunten al nombre exacto configurado mediante la consulta: `from(bucket: "Lumenia")`. |
+
+* **Martínez Hernández Brayan:** La implementación del prototipo confirmó que es posible desarrollar una solución de monitoreo ambiental basada en tecnologías de bajo consumo energético y comunicación inalámbrica de largo alcance. La integración entre el nodo transmisor y el gateway permitió validar la interoperabilidad entre LoRa y redes IP, consolidando una arquitectura eficiente y adaptable. El análisis de datos recopilados demuestra que el sistema puede registrar variaciones reales en iluminancia y condiciones ambientales, aportando información objetiva para el estudio del confort visual y la sobreexposición nocturna. En conjunto, el proyecto evidencia un equilibrio adecuado entre factibilidad técnica, escalabilidad y pertinencia social .
+
+
+* **Gonzaga López Luis Fernando:** A lo largo del desarrollo se aplicaron procedimientos de configuración y validación que permitieron comprender la importancia de las comunicaciones inalámbricas en sistemas IoT distribuidos. La selección de LoRa como medio principal respondió a criterios de alcance y eficiencia energética, mientras que WiFi facilitó la visualización remota mediante un dashboard funcional. Los resultados obtenidos muestran consistencia en la adquisición y transmisión de datos, confirmando la correcta integración hardware-software. Este prototipo representa una herramienta inicial para cuantificar condiciones de iluminación nocturna y constituye un paso preliminar hacia la generación de evidencia técnica para la toma de decisiones en entornos urbanos .
+
+
+* **López Paz Gustavo:** El proyecto demostró que la combinación de sensores ambientales, microcontroladores y tecnologías inalámbricas permite construir un sistema de monitoreo confiable y modular. Las pruebas realizadas evidenciaron estabilidad en las mediciones, integridad en la transmisión de datos y correcta estructuración en formato JSON para su visualización en tiempo real. La arquitectura implementada no solo cumple con los objetivos técnicos planteados, sino que también abre la posibilidad de escalar el sistema hacia redes más amplias de monitoreo. En este sentido, el prototipo establece una base tecnológica sólida para abordar la problemática de la iluminación nocturna desde una perspectiva cuantitativa y sistemática.
 
 ---
+
+## 📚 REFERENCIAS BIBLIOGRÁFICAS
+
+1. International Dark-Sky Association. *Light Pollution and Its Impacts* (2023). [https://www.darksky.org/light-pollution/](https://www.darksky.org/light-pollution/).
+2. Augustin, A., Yi, J., Clausen, T. & Townsley, W. *A Study of LoRa: Long Range Low Power Networks for the Internet of Things*. Sensors 16, 1466 (2016).
+3. Cho, Y., Ryu, S. & Lee, B. H. *Effects of Artificial Light at Night on Human Health: A Literature Review*. Chronobiology International 35, 1729-1744 (2018).
+4. SEMARNAT. *Contaminación lumínica y su impacto ambiental en México* (2022). [https://www.gob.mx/semarnat](https://www.gob.mx/semarnat).
+5. Falchi, F., Cinzano, P., Duriscoe, D. & Kyba, C. C. M. *The New World Atlas of Artificial Night Sky Brightness* 1st Ed. (Springer International Publishing, 2016).
+6. *NOM-013-ENER-2013 — Eficiencia energética para alumbrado en vialidades*. Diario Oficial de la Federación, México (2013).
