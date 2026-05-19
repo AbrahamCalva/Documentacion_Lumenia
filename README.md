@@ -6,19 +6,20 @@
 ### DATOS INSTITUCIONALES DEL PROYECTO
 
 * **Prototipo Desarrollado:** FLDSMDFR (Full Light Detection & Skyglow Monitoring: Dark-sky Field Research)
-* **Autores e Integrantes del Equipo:**
+
+**Autores e Integrantes del Equipo:**
 * Calva Abraham (Matrícula: 230110637)
 * Gonzaga López Luis Fernando (Matrícula: 230110528)
 * López Paz Gustavo (Matrícula: 230110531)
 * Martínez Hernández Brayan (Matrícula: 230110578)
 
 
-* **Programa Académico:** Ingeniería en Tecnologías de la Información y Comunicaciones
-* **Asignatura y Nivel:** Proyecto Integrador – 6° Semestre, Grupo B
-* **Institución Educativa:** Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH)
-* **Catedrático Evaluador:** Mtro. Saúl Isaí Soto Ortiz
-* **Periodo de Desarrollo:** Enero – Mayo 2026
-* **Ubicación de Emisión:** Mixquiahuala de Juárez, Hidalgo, México
+**Programa Académico:** Ingeniería en Tecnologías de la Información y Comunicaciones
+**Asignatura y Nivel:** Proyecto Integrador – 6° Semestre, Grupo B
+**Institución Educativa:** Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH)
+**Catedrático Evaluador:** Mtro. Saúl Isaí Soto Ortiz
+**Periodo de Desarrollo:** Enero – Mayo 2026
+**Ubicación de Emisión:** Mixquiahuala de Juárez, Hidalgo, México
 
 ---
 
@@ -73,12 +74,10 @@ En esta etapa del proyecto, la instrumentación ha sido seleccionada meticulosam
 Bajo un enfoque de arquitectura modular y escalable, el sistema contempla la futura validación e integración de las siguientes variables:
 
 * **Sensor de Luz Ultravioleta (VEML6075):** Mide índices de luz UV-A y UV-B para validar la ausencia absoluta de radiación solar residual en las mediciones nocturnas, aportando un enfoque de salud dermatológica preventiva frente al estrés oxidativo urbano.
-* 
-**Sensor de Luz Espectral (AS7341 o TCS34725):** Diseñado para determinar la firma cromática (RGB y temperatura de color) de las luminarias públicas, diferenciando la iluminación cálida de la fría (luz azul), la cual tiene un mayor índice de dispersión Rayleigh/Mie e impacto directo en los ritmos circadianos .
+* **Sensor de Luz Espectral (AS7341 o TCS34725):** Diseñado para determinar la firma cromática (RGB y temperatura de color) de las luminarias públicas, diferenciando la iluminación cálida de la fría (luz azul), la cual tiene un mayor índice de dispersión Rayleigh/Mie e impacto directo en los ritmos circadianos .
 
 
-* 
-**Sensor de Nivel de Ruido (KY-037):** Encargado de capturar el nivel sonoro ambiental para evaluar el confort y bienestar nocturno urbano desde una perspectiva multidimensional .
+* **Sensor de Nivel de Ruido (KY-037):** Encargado de capturar el nivel sonoro ambiental para evaluar el confort y bienestar nocturno urbano desde una perspectiva multidimensional .
 
 
 
@@ -416,8 +415,7 @@ El nodo periférico incorpora soporte para celdas LiPo de 3.7V acopladas por int
 Durante la fase de experimentación del prototipo, se realizaron múltiples ciclos de lectura y validación incremental:
 
 * **Módulo de Adquisición:** En condiciones de iluminación interior controlada, el sensor óptico registró valores estables entre 35 y 120 lux, mientras que en exposición directa superó los 300 lux, demostrando sensibilidad adecuada para el estudio de sobreexposición. El BMP280 arrojó lecturas consistentes dentro de un rango de tolerancia de ±1 °C respecto a estaciones meteorológicas de referencia local.
-* 
-**Módulo de Transmisión LoRa:** El envío de datos en la banda de 915 MHz fue totalmente exitoso bajo el perfil Sync Word 0x12, confirmando recepción íntegra de tramas CSV cada 2 segundos sin pérdidas de paquetes registradas en el entorno local .
+* **Módulo de Transmisión LoRa:** El envío de datos en la banda de 915 MHz fue totalmente exitoso bajo el perfil Sync Word 0x12, confirmando recepción íntegra de tramas CSV cada 2 segundos sin pérdidas de paquetes registradas en el entorno local .
 
 
 * **Módulo Analítico JSON y Dashboards:** El gateway segmentó las variables de forma correcta mediante delimitadores lógicos y construyó los objetos JSON analizados por Node-RED e InfluxDB con consultas Flux ejecutadas con una latencia mínima de 0.01 segundos.
