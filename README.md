@@ -6,20 +6,19 @@
 ### DATOS INSTITUCIONALES DEL PROYECTO
 
 * **Prototipo Desarrollado:** FLDSMDFR (Full Light Detection & Skyglow Monitoring: Dark-sky Field Research)
-
-**Autores e Integrantes del Equipo:**
+* **Autores e Integrantes del Equipo:**
 * Calva Abraham (Matrícula: 230110637)
 * Gonzaga López Luis Fernando (Matrícula: 230110528)
 * López Paz Gustavo (Matrícula: 230110531)
 * Martínez Hernández Brayan (Matrícula: 230110578)
 
 
-**Programa Académico:** Ingeniería en Tecnologías de la Información y Comunicaciones
-**Asignatura y Nivel:** Proyecto Integrador – 6° Semestre, Grupo B
-**Institución Educativa:** Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH)
-**Catedrático Evaluador:** Mtro. Saúl Isaí Soto Ortiz
-**Periodo de Desarrollo:** Enero – Mayo 2026
-**Ubicación de Emisión:** Mixquiahuala de Juárez, Hidalgo, México
+* **Programa Académico:** Ingeniería en Tecnologías de la Información y Comunicaciones
+* **Asignatura y Nivel:** Proyecto Integrador – 6° Semestre, Grupo B
+* **Institución Educativa:** Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH)
+* **Catedrático Evaluador:** Mtro. Saúl Isaí Soto Ortiz
+* **Periodo de Desarrollo:** Enero – Mayo 2026
+* **Ubicación de Emisión:** Mixquiahuala de Juárez, Hidalgo, México
 
 ---
 
@@ -65,7 +64,7 @@ En esta etapa del proyecto, la instrumentación ha sido seleccionada meticulosam
 
 | Sensor / Componente | Variables Medidas | Justificación e Impacto Técnico en el Sistema |
 | --- | --- | --- |
-| **TSL2591 HDR**<br>(Evolución del GY-30) | Iluminancia en luxes (lx) e infrarrojo cercano. | Sensor óptico de rango dinámico extremo. A diferencia del BH1750 (GY-30) que cuenta con un límite inferior de 1 lux de resolución, el TSL2591 posee una sensibilidad de hasta 188 microluxes (µlux). Permite registrar las variaciones mínimas del cielo nocturno (skyglow) traduciendo percepciones subjetivas en métricas de alta precisión para el éxito del monitoreo. |
+| **TSL2591 HDR**<br><br>(Evolución del GY-30) | Iluminancia en luxes (lx) e infrarrojo cercano. | Sensor óptico de rango dinámico extremo. A diferencia del BH1750 (GY-30) que cuenta con un límite inferior de 1 lux de resolución, el TSL2591 posee una sensibilidad de hasta 188 microluxes (µlux). Permite registrar las variaciones mínimas del cielo nocturno (skyglow) traduciendo percepciones subjetivas en métricas de alta precisión para el éxito del monitoreo. |
 | **BMP280** | Temperatura (°C) y Presión Atmosférica (hPa). | Aporta el contexto físico de la densidad y estabilidad de la atmósfera. Los frentes climáticos y cambios de presión modifican el índice de refracción, alterando directamente cómo se refracta y dispersa la luz artificial hacia el cenit. |
 | **MQ-135** | CO2, amoníaco, benceno, humo y gases. | Identifica la carga de agentes contaminantes en PPM. Esencial debido a que los aerosoles y partículas suspendidas actúan como elementos de dispersión bajo el efecto Mie, atrapando la luz ascendente y magnificando el "domo de luz" urbano. |
 
@@ -93,7 +92,7 @@ Todos los sensores del nodo periférico interactúan mediante el bus físico I2C
 
 | Sensor / Periférico | Pin del Sensor | Pin Heltec LoRa 32 V2 | Descripción y Notas de Estabilidad |
 | --- | --- | --- | --- |
-| **TSL2591 / GY-30** | VCC  <br><br> GND <br><br> SDA<br><br>SCL | 3.3V(Línea Vext) <br><br> GND <br> <br>GPIO 4 <br><br>GPIO 15 | Alimentación conmutada (GPIO 21 = LOW activa energía).<br><br>Tierra común obligatoria de referencia.<br><br>Línea de datos I2C con Pull-up interno habilitado.<br><br>Línea de reloj I2C con Pull-up interno habilitado. |
+| **TSL2591 / GY-30** | VCC<br><br>GND<br><br>SDA<br><br>SCL | 3.3V (Línea Vext)<br><br>GND<br><br>GPIO 4<br><br>GPIO 15 | Alimentación conmutada (GPIO 21 = LOW activa energía).<br><br>Tierra común obligatoria de referencia.<br><br>Línea de datos I2C con Pull-up interno habilitado.<br><br>Línea de reloj I2C con Pull-up interno habilitado. |
 | **BMP280** | VCC<br><br>GND<br><br>SDA<br><br>SCL | 3.3V (Línea Vext)<br><br>GND<br><br>GPIO 4<br><br>GPIO 15 | Comparte la línea conmutada de energía de sensores.<br><br>Tierra común de la placa.<br><br>Comparte canal de datos I2C (Dirección lógica 0x76).<br><br>Comparte canal de reloj de bus I2C. |
 | **MQ-135** | VCC<br><br>GND<br><br>AOUT<br><br>DOUT | 5V (Línea USB)<br><br>GND<br><br>GPIO 36<br><br>GPIO 37 | Requiere voltaje estable de 5V para su celda de calentamiento térmica.<br><br>Tierra común de referencia.<br><br>Entrada analógica nativa de 12 bits (ADC1_CH0).<br><br>Salida digital de umbral por hardware (Opcional). |
 
@@ -134,17 +133,14 @@ La Heltec receptora se acopla directamente por hardware a la pasarela celular Li
 
 El prototipo FLDSMDFR implementa una pila de protocolos multi-capa orientada a garantizar resiliencia en entornos institucionales y urbanos:
 
-1. 
-**Protocolo I2C (Inter-Integrated Circuit):** Utilizado para la comunicación síncrona entre el microcontrolador ESP32 y los sensores periféricos mediante las líneas de datos (SDA) y reloj (SCL) compartidas, optimizando el uso de pines lógicos .
+1. **Protocolo I2C (Inter-Integrated Circuit):** Utilizado para la comunicación síncrona entre el microcontrolador ESP32 y los sensores periféricos mediante las líneas de datos (SDA) y reloj (SCL) compartidas, optimizando el uso de pines lógicos .
 
 
 2. **Protocolo SPI (Serial Peripheral Interface):** Canal síncrono de alta velocidad utilizado internamente para la transferencia de datos entre el núcleo del ESP32 y el transceptor de radio LoRa integrado (chip SX1276/78).
-3. 
-**Protocolo LoRa (Capa Física LPWAN):** Modulación por espectro ensanchado (Chirp Spread Spectrum) encargada del envío inalámbrico de tramas de telemetría a largas distancias con consumo de energía optimizado .
+3. **Protocolo LoRa (Capa Física LPWAN):** Modulación por espectro ensanchado (Chirp Spread Spectrum) encargada del envío inalámbrico de tramas de telemetría a largas distancias con consumo de energía optimizado .
 
 
-4. 
-**Formato JSON (Capa de Aplicación):** Estructura estándar de organización de datos basada en pares clave-valor que unifica las variables de telemetría antes de su inyección a la nube .
+4. **Formato JSON (Capa de Aplicación):** Estructura estándar de organización de datos basada en pares clave-valor que unifica las variables de telemetría antes de su inyección a la nube .
 
 
 
