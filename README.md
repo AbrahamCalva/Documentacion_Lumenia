@@ -86,6 +86,10 @@ Bajo un enfoque de arquitectura modular y escalable, el sistema contempla la fut
 
 El hardware pasó de una fase de pruebas en protoboard a una placa de prototipos perforada permanente con conexiones debidamente soldadas, eliminando falsos contactos durante el monitoreo continuo en campo.
 
+![Arquitectura del sistema](Circuito%20de%20lumenia.jpeg)
+
+*Figura 1. circuito general del sistema LUMENIA.*
+
 ### Tabla 2: Conexiones del Nodo Emisor Periférico
 
 Todos los sensores del nodo periférico interactúan mediante el bus físico I2C, compartiendo líneas y estabilizados por el pin controlado por software `Vext` .
@@ -142,11 +146,13 @@ El prototipo FLDSMDFR implementa una pila de protocolos multi-capa orientada a g
 
 4. **Formato JSON (Capa de Aplicación):** Estructura estándar de organización de datos basada en pares clave-valor que unifica las variables de telemetría antes de su inyección a la nube .
 
-
-
 ### Implementación de una Red Alámbrica de Emergencia
 
 Complementando la infraestructura de largo alcance, el prototipo integra un principio de **tolerancia a fallos** mediante una red de respaldo confinada por medio físico. Basada en los estándares de **Ethernet IEEE 802.3**, establece conectividad redundante directa y dedicada entre nodos utilizando un switch de Capa 2. Ante una eventual degradación del medio guiado por inducción, saturación del espectro radioeléctrico o falla en las antenas, el sistema realiza una transición inmediata hacia la infraestructura cableada, manteniendo la persistencia de las sesiones y servicios sin requerir reconfiguraciones lógicas en el endpoint.
+
+![Arquitectura del sistema](ArquitecturaFinal.png)
+
+*Figura 1. Arquitectura general del sistema LUMENIA.*
 
 ---
 
